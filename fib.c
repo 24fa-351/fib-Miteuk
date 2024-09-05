@@ -32,5 +32,22 @@ int main()
          printf("You entered the number: %d\n", number);
       }
 
+   int fileNum;
+
+   fscanf(file, "%d", &fileNum);
+   fclose(file);
+
+   int N = number + fileNum;
+
+   if(info == 'r') //recursive 
+   {
+
+   }
+   else if(info == 'i') //iterative
+   {
+
+   }
+
+
 return 0;
 }
