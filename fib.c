@@ -3,43 +3,6 @@
 #include <string.h>
 
 // Fibonacci Functions
-unsigned long long recursive(int n);
-unsigned long long iterative(int n);
-
-int main() 
-{
-   int number;
-   char info; // for "r" or "i"
-   char fileName[100];
-
-   FILE *file;
-
-   scanf("%d %c %s", &number, &info, fileName);
-
-   int fileNum;
-
-   file = fopen(fileName, "r");
-   fscanf(file, "%d", &fileNum);
-   fclose(file);
-
-   int N = number + fileNum;
-   unsigned long long fibNumber;
-
-   //printf("N = %d", N);
-   if(info == 'r') //recursive 
-   {
-      fibNumber = recursive(N);
-   }
-   else if(info == 'i') //iterative
-   {
-      fibNumber = iterative(N);
-   }
-
-   printf("the %dth Fibonacci number is: %llu\n", N, fibNumber);
-
-return 0;
-}
-
 unsigned long long recursive(int n)
 {
    if (n == 1)
@@ -69,4 +32,35 @@ unsigned long long iterative(int n)
       b = next;
    }
    return b;
+}
+
+int main(int argc, char *argv[]) 
+{
+
+   int number = atoi(argv[1]);
+   //char info = argv[2][0]; // for "r" or "i"
+   FILE *file = fopen(argv[3], "r");
+
+   int fileNum;
+
+   fscanf(file, "%d", &fileNum);
+   fclose(file);
+
+   int N = number + fileNum;
+   unsigned long long fibNumber;
+
+   //printf("N = %d", N);
+   if(strcmp(argv[2],"r") == 0) //recursive 
+   {
+      fibNumber = recursive(N);
+   }
+   else if(strcmp(argv[2], "i") == 0 ) //iterative
+   {
+      fibNumber = iterative(N);
+   }
+
+   printf("%llu\n", fibNumber);
+   
+
+return 0;
 }
