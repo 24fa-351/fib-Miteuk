@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+int recursive(int n);
+int iterative(int n);
+
 int main() 
 {
    int number;
@@ -15,39 +18,55 @@ int main()
 
    printf("Enter r or i: ");
    scanf(" %c", &info);
-   if(info != 'r' || info != 'i')
-      {
-         printf("Invalid input.");
-         return 1;
-      }
 
-   if(info == 'r')
-      {
-         file = fopen(fileName, "r");
-         printf("File '%s' opened for reading.\n", fileName);
-         fclose(file);
-      }
-   else if(info == 'i')
-      {
-         printf("You entered the number: %d\n", number);
-      }
+   printf("Enter a filename: ");
+   scanf("%s", file);
 
    int fileNum;
 
+   file = fopen(fileName,"r");
    fscanf(file, "%d", &fileNum);
    fclose(file);
 
    int N = number + fileNum;
 
+
    if(info == 'r') //recursive 
    {
-
+      recursive(N);
+      printf("Fibonacci number is: ", N);
    }
    else if(info == 'i') //iterative
    {
-
+      iterative(N);
+      printf("Fibonacci number is: ", N);
    }
 
 
 return 0;
+}
+
+int recursive(int n)
+{
+   if (n <= 1)
+      return n;
+   return recursive(n-1) + recursive(n-2); 
+}
+
+int iterative(int n)
+{
+   if (n <= 1)
+      return n;
+   
+   int a = 0;
+   int b = 1;
+   int next;
+
+   for( int i = 2; i <= n; i++)
+   {
+      next = a + b;
+      a = b;
+      b = next;
+   }
+   return b;
 }
