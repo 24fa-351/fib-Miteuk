@@ -35,7 +35,7 @@ int main()
       fibNumber = iterative(N);
    }
 
-printf("the %dth Fibonacci number is: %d\n", N, fibNumber);
+   printf("the %dth Fibonacci number is: %llu\n", N, fibNumber);
 
 return 0;
 }
