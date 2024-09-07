@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 
+// Fibonacci Functions
 unsigned long long recursive(int n);
 unsigned long long iterative(int n);
 
