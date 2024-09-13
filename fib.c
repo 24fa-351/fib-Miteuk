@@ -2,26 +2,40 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX 100
+
+unsigned long long memo[MAX];
+
+//memo func
+
+void memoization()
+{
+   for (int i = 0; i< MAX; i++)
+      memo[i] = -1;
+}
+
 // Fibonacci Functions
-int recursive(int n)
+unsigned long long recursive_memo(unsigned long long n)
 {
    if (n == 1)
       return 0;
    if (n == 2)
       return 1;
-   return recursive(n-1) + recursive(n-2); 
+   memo[n] = recursive_memo(n-1) + recursive_memo(n-2);
+   return memo[n];
+
 }
 
-int iterative(int n)
+unsigned long long iterative_memo(unsigned long long n)
 {
    if (n == 1)
       return 0;
    if (n == 2)
       return 1;
    
-   int a = 0;
-   int b = 1;
-   int next;
+   unsigned long long a = 0;
+   unsigned long long b = 1;
+   unsigned long long next;
 
    //Fibonacci number #1 is 0 so start at 3 instead of 2. F(1)= 0, F(2) = 1
    for(int i = 3; i <= n; ++i)
@@ -36,27 +50,28 @@ int iterative(int n)
 int main(int argc, char *argv[]) 
 {
 
-   int number = atoi(argv[1]);
+   unsigned long long number = atoi(argv[1]);
    FILE *file = fopen(argv[3], "r");
 
-   int fileNum;
+   unsigned long long fileNum;
 
-   fscanf(file, "%d", &fileNum);
+   fscanf(file, "%llu", &fileNum);
    fclose(file);
 
-   int N = number + fileNum;
-   int fibNumber;
+   memoization();
+   unsigned long long N = number + fileNum;
+   unsigned long long fibNumber;
 
    if(strcmp(argv[2],"r") == 0) //recursive 
    {
-      fibNumber = recursive(N);
+      fibNumber = recursive_memo(N);
    }
    else if(strcmp(argv[2], "i") == 0 ) //iterative
    {
-      fibNumber = iterative(N);
+      fibNumber = iterative_memo(N);
    }
 
-   printf("%d\n", fibNumber);
+   printf("%llu\n", fibNumber);
    
 
 return 0;
